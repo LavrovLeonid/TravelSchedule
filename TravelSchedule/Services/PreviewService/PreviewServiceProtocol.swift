@@ -10,5 +10,5 @@ import Foundation
 protocol PreviewServiceProtocol: Identifiable {
     var id: UUID { get }
     
-    func getPreview() async -> [PreviewItem]
+    func getPreview() async throws -> [PreviewItem]
 }

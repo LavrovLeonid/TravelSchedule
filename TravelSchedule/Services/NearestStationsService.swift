@@ -14,8 +14,6 @@ protocol NearestStationsServiceProtocol {
 }
 
 final class NearestStationsService: BaseService, NearestStationsServiceProtocol {
-    let id = UUID()
-    
     func getNearestStations(lat: Double, lng: Double, distance: Int) async throws -> NearestStationsResponse {
         let response = try await client.getNearestStations(query: .init(
             apikey: apiKey,
@@ -29,7 +27,11 @@ final class NearestStationsService: BaseService, NearestStationsServiceProtocol 
 }
 
 extension NearestStationsService: PreviewServiceProtocol {
-    func getPreview() async -> [PreviewItem] {
+    var id: UUID {
+        UUID()
+    }
+    
+    func getPreview() async throws -> [PreviewItem] {
         do {
             let nearestStationsResponse = try await getNearestStations(
                 lat: 59.864177,
@@ -43,7 +45,7 @@ extension NearestStationsService: PreviewServiceProtocol {
         } catch {
             print("Fetch preview error in SearchService: \(error)")
             
-            return []
+            throw error
         }
     }
 }

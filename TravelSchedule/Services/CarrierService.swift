@@ -14,8 +14,6 @@ protocol CarrierServiceProtocol {
 }
 
 final class CarrierService: BaseService, CarrierServiceProtocol {
-    let id = UUID()
-    
     func getCarrier(code: String) async throws -> CarrierResponse {
         let response = try await client.getCarrier(query: .init(
             apikey: apiKey,
@@ -27,7 +25,11 @@ final class CarrierService: BaseService, CarrierServiceProtocol {
 }
 
 extension CarrierService: PreviewServiceProtocol {
-    func getPreview() async -> [PreviewItem] {
+    var id: UUID {
+        UUID()
+    }
+    
+    func getPreview() async throws -> [PreviewItem] {
         do {
             let carrierResponse = try await getCarrier(code: "680")
             
@@ -35,7 +37,7 @@ extension CarrierService: PreviewServiceProtocol {
         } catch {
             print("Fetch preview error in SearchService: \(error)")
             
-            return []
+            throw error
         }
     }
 }

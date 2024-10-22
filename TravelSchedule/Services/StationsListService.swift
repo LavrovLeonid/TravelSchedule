@@ -14,20 +14,24 @@ protocol StationsListServiceProtocol {
 }
 
 final class StationsListService: BaseService, StationsListServiceProtocol {
-    let id = UUID()
-    
     func getStationsList() async throws -> StationsListResponse {
         let response = try await client.getStationsList(query: .init(
             apikey: apiKey,
             format: .json
         ))
         
-        return try response.ok.body.json
+        let html = try response.ok.body.html
+        
+        return try await JSONDecoder().decode(from: html, to: StationsListResponse.self)
     }
 }
 
 extension StationsListService: PreviewServiceProtocol {
-    func getPreview() async -> [PreviewItem] {
+    var id: UUID {
+        UUID()
+    }
+    
+    func getPreview() async throws -> [PreviewItem] {
         do {
             let stationsListResponse = try await getStationsList()
             
@@ -37,7 +41,7 @@ extension StationsListService: PreviewServiceProtocol {
         } catch {
             print("Fetch preview error in SearchService: \(error)")
             
-            return []
+            throw error
         }
     }
 }

@@ -14,8 +14,6 @@ protocol SearchServiceProtocol {
 }
 
 final class SearchService: BaseService, SearchServiceProtocol {
-    let id = UUID()
-    
     func getSearch(from: String, to: String) async throws -> SearchResponse {
         let response = try await client.getSearch(query: .init(
             apikey: apiKey,
@@ -28,7 +26,11 @@ final class SearchService: BaseService, SearchServiceProtocol {
 }
 
 extension SearchService: PreviewServiceProtocol {
-    func getPreview() async -> [PreviewItem] {
+    var id: UUID {
+        UUID()
+    }
+    
+    func getPreview() async throws -> [PreviewItem] {
         do {
             let searchResponse = try await getSearch(from: "s9813094", to: "s9857049")
             
@@ -38,7 +40,7 @@ extension SearchService: PreviewServiceProtocol {
         } catch {
             print("Fetch preview error in SearchService: \(error)")
             
-            return []
+            throw error
         }
     }
 }

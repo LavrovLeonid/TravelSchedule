@@ -142,9 +142,8 @@ paths:
         "200":
           description: success
           content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/StationsListResponse'
+            text/html:
+              schema: {}
   /copyright/:
     get:
       tags:
@@ -261,14 +260,15 @@ components:
         direction:
           type: string
           nullable: true
-        station_type:
-          $ref: '#/components/schemas/StationType'
-        latitude:
-          $ref: '#/components/schemas/Latitude'
-        longitude:
-          $ref: '#/components/schemas/Longitude'
-        transport_type:
-          $ref: '#/components/schemas/TransportType'
+        # Приходят невалидные данные
+        # station_type:
+        #   $ref: '#/components/schemas/StationType'
+        # latitude:
+        #   $ref: '#/components/schemas/Latitude'
+        # longitude:
+        #   $ref: '#/components/schemas/Longitude'
+        # transport_type:
+        #   $ref: '#/components/schemas/TransportType'
     Pagination:
       type: object
       properties:
@@ -447,7 +447,6 @@ components:
     apiKey:
       name: apikey
       description: API key
-      required: true
       in: query
       schema:
         type: string

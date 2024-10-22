@@ -14,8 +14,6 @@ protocol CopyrightServiceProtocol {
 }
 
 final class CopyrightService: BaseService, CopyrightServiceProtocol {
-    let id = UUID()
-    
     func getCopyright() async throws -> CopyrightResponse {
         let response = try await client.getCopyright(query: .init(
             apikey: apiKey,
@@ -27,7 +25,11 @@ final class CopyrightService: BaseService, CopyrightServiceProtocol {
 }
 
 extension CopyrightService: PreviewServiceProtocol {
-    func getPreview() async -> [PreviewItem] {
+    var id: UUID {
+        UUID()
+    }
+    
+    func getPreview() async throws -> [PreviewItem] {
         do {
             let copyrightResponse = try await getCopyright()
             
@@ -35,7 +37,7 @@ extension CopyrightService: PreviewServiceProtocol {
         } catch {
             print("Fetch preview error in SearchService: \(error)")
             
-            return []
+            throw error
         }
     }
 }

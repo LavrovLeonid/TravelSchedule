@@ -14,8 +14,6 @@ protocol NearestSettlementServiceProtocol {
 }
 
 final class NearestSettlementService: BaseService, NearestSettlementServiceProtocol {
-    let id = UUID()
-    
     func getNearestSettlement(lat: Double, lng: Double) async throws -> NearestSettlementResponse {
         let response = try await client.getNearestSettlement(query: .init(
             apikey: apiKey,
@@ -28,7 +26,11 @@ final class NearestSettlementService: BaseService, NearestSettlementServiceProto
 }
 
 extension NearestSettlementService: PreviewServiceProtocol {
-    func getPreview() async -> [PreviewItem] {
+    var id: UUID {
+        UUID()
+    }
+    
+    func getPreview() async throws -> [PreviewItem] {
         do {
             let nearestSettlementResponse = try await getNearestSettlement(
                 lat: 59.864177,
@@ -39,7 +41,7 @@ extension NearestSettlementService: PreviewServiceProtocol {
         } catch {
             print("Fetch preview error in SearchService: \(error)")
             
-            return []
+            throw error
         }
     }
 }

@@ -7,5 +7,5 @@
 
 protocol BaseServiceProtocol {
     var client: Client { get }
-    var apiKey: String { get }
+    var apiKey: String? { get }
 }

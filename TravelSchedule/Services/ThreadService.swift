@@ -14,8 +14,6 @@ protocol ThreadServiceProtocol {
 }
 
 final class ThreadService: BaseService, ThreadServiceProtocol {
-    let id = UUID()
-    
     func getThread(uid: String) async throws -> ThreadResponse {
         let response = try await client.getThread(query: .init(
             apikey: apiKey,
@@ -27,7 +25,11 @@ final class ThreadService: BaseService, ThreadServiceProtocol {
 }
 
 extension ThreadService: PreviewServiceProtocol {
-    func getPreview() async -> [PreviewItem] {
+    var id: UUID {
+        UUID()
+    }
+    
+    func getPreview() async throws -> [PreviewItem] {
         do {
             let threadResponse = try await getThread(
                 uid: "empty_1_f9813109t9878648_175"
@@ -37,7 +39,7 @@ extension ThreadService: PreviewServiceProtocol {
         } catch {
             print("Fetch preview error in SearchService: \(error)")
             
-            return []
+            throw error
         }
     }
 }

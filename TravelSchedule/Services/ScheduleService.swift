@@ -14,8 +14,6 @@ protocol ScheduleServiceProtocol {
 }
 
 final class ScheduleService: BaseService, ScheduleServiceProtocol {
-    let id = UUID()
-    
     func getSchedule(station: String) async throws -> ScheduleResponse {
         let response = try await client.getSchedule(query: .init(
             apikey: apiKey,
@@ -27,7 +25,11 @@ final class ScheduleService: BaseService, ScheduleServiceProtocol {
 }
 
 extension ScheduleService: PreviewServiceProtocol {
-    func getPreview() async -> [PreviewItem] {
+    var id: UUID {
+        UUID()
+    }
+    
+    func getPreview() async throws -> [PreviewItem] {
         do {
             let scheduleResponse = try await getSchedule(
                 station: "s9813094"
@@ -37,7 +39,7 @@ extension ScheduleService: PreviewServiceProtocol {
         } catch {
             print("Fetch preview error in SearchService: \(error)")
             
-            return []
+            throw error
         }
     }
 }

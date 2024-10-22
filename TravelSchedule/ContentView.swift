@@ -16,20 +16,25 @@ struct ContentView: View {
     private var previewServices: [any PreviewServiceProtocol] {
         guard let serverURL = try? Servers.server1() else { return [] }
         
+        let authenticationMiddleware = AuthenticationMiddleware(
+            apiKey: Constants.apiKey
+        )
+        
         let client = Client(
             serverURL: serverURL,
-            transport: URLSessionTransport()
+            transport: URLSessionTransport(),
+            middlewares: [authenticationMiddleware]
         )
         
         return [
-            SearchService(client: client, apiKey: Constants.apiKey),
-            ScheduleService(client: client, apiKey: Constants.apiKey),
-            ThreadService(client: client, apiKey: Constants.apiKey),
-            NearestStationsService(client: client, apiKey: Constants.apiKey),
-            NearestSettlementService(client: client, apiKey: Constants.apiKey),
-            CarrierService(client: client, apiKey: Constants.apiKey),
-            StationsListService(client: client, apiKey: Constants.apiKey),
-            CopyrightService(client: client, apiKey: Constants.apiKey)
+            SearchService(client: client),
+            ScheduleService(client: client),
+            ThreadService(client: client),
+            NearestStationsService(client: client),
+            NearestSettlementService(client: client),
+            CarrierService(client: client),
+            StationsListService(client: client),
+            CopyrightService(client: client)
         ]
     }
     
@@ -56,11 +61,11 @@ struct ContentView: View {
         }
     }
     
-    func fetchPreview(service: any PreviewServiceProtocol) {
+    func fetchPreview(service: some PreviewServiceProtocol) {
         isLoadingPreview = true
         
         Task {
-            previewItems = await service.getPreview()
+            previewItems = (try? await service.getPreview()) ?? []
             isLoadingPreview = false
         }
     }
