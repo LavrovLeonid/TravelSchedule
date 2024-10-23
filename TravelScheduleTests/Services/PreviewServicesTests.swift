@@ -21,17 +21,52 @@ struct PreviewServicesTests {
             middlewares: [authenticationMiddleware]
         )
         
-        let previewItems = try? await [
-            SearchService(client: client).getPreview(),
-            ScheduleService(client: client).getPreview(),
-            ThreadService(client: client).getPreview(),
-            NearestStationsService(client: client).getPreview(),
-            NearestSettlementService(client: client).getPreview(),
-            CarrierService(client: client).getPreview(),
-            StationsListService(client: client).getPreview(),
-            CopyrightService(client: client).getPreview()
-        ]
+        await #expect(throws: Never.self ) {
+            let response = try await SearchService(client: client).getPreview()
+            
+            #expect(response != nil)
+        }
         
-        #expect(previewItems != nil)
+        await #expect(throws: Never.self ) {
+            let response = try await ScheduleService(client: client).getPreview()
+            
+            #expect(response != nil)
+        }
+        
+        await #expect(throws: Never.self ) {
+            let response = try await ThreadService(client: client).getPreview()
+            
+            #expect(response != nil)
+        }
+        
+        await #expect(throws: Never.self ) {
+            let response = try await NearestStationsService(client: client).getPreview()
+            
+            #expect(response != nil)
+        }
+        
+        await #expect(throws: Never.self ) {
+            let response = try await NearestSettlementService(client: client).getPreview()
+            
+            #expect(response != nil)
+        }
+        
+        await #expect(throws: Never.self ) {
+            let response = try await CarrierService(client: client).getPreview()
+            
+            #expect(response != nil)
+        }
+        
+        await #expect(throws: Never.self ) {
+            let response = try await StationsListService(client: client).getPreview()
+            
+            #expect(response != nil)
+        }
+        
+        await #expect(throws: Never.self ) {
+            let response = try await CopyrightService(client: client).getPreview()
+            
+            #expect(response != nil)
+        }
     }
 }

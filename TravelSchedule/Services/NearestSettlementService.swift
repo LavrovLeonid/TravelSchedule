@@ -26,10 +26,6 @@ final class NearestSettlementService: BaseService, NearestSettlementServiceProto
 }
 
 extension NearestSettlementService: PreviewServiceProtocol {
-    var id: UUID {
-        UUID()
-    }
-    
     func getPreview() async throws -> [PreviewItem] {
         do {
             let nearestSettlementResponse = try await getNearestSettlement(

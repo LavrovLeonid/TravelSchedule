@@ -25,10 +25,6 @@ final class CarrierService: BaseService, CarrierServiceProtocol {
 }
 
 extension CarrierService: PreviewServiceProtocol {
-    var id: UUID {
-        UUID()
-    }
-    
     func getPreview() async throws -> [PreviewItem] {
         do {
             let carrierResponse = try await getCarrier(code: "680")

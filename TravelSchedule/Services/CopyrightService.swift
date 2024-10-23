@@ -25,10 +25,6 @@ final class CopyrightService: BaseService, CopyrightServiceProtocol {
 }
 
 extension CopyrightService: PreviewServiceProtocol {
-    var id: UUID {
-        UUID()
-    }
-    
     func getPreview() async throws -> [PreviewItem] {
         do {
             let copyrightResponse = try await getCopyright()

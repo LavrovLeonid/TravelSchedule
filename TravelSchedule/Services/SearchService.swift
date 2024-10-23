@@ -26,10 +26,6 @@ final class SearchService: BaseService, SearchServiceProtocol {
 }
 
 extension SearchService: PreviewServiceProtocol {
-    var id: UUID {
-        UUID()
-    }
-    
     func getPreview() async throws -> [PreviewItem] {
         do {
             let searchResponse = try await getSearch(from: "s9813094", to: "s9857049")

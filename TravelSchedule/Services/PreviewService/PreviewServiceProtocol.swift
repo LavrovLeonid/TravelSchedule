@@ -12,3 +12,9 @@ protocol PreviewServiceProtocol: Identifiable {
     
     func getPreview() async throws -> [PreviewItem]
 }
+
+extension PreviewServiceProtocol {
+    var id: UUID {
+        UUID()
+    }
+}

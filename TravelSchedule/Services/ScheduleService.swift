@@ -25,10 +25,6 @@ final class ScheduleService: BaseService, ScheduleServiceProtocol {
 }
 
 extension ScheduleService: PreviewServiceProtocol {
-    var id: UUID {
-        UUID()
-    }
-    
     func getPreview() async throws -> [PreviewItem] {
         do {
             let scheduleResponse = try await getSchedule(

@@ -25,10 +25,6 @@ final class ThreadService: BaseService, ThreadServiceProtocol {
 }
 
 extension ThreadService: PreviewServiceProtocol {
-    var id: UUID {
-        UUID()
-    }
-    
     func getPreview() async throws -> [PreviewItem] {
         do {
             let threadResponse = try await getThread(

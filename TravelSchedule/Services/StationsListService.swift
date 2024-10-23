@@ -27,10 +27,6 @@ final class StationsListService: BaseService, StationsListServiceProtocol {
 }
 
 extension StationsListService: PreviewServiceProtocol {
-    var id: UUID {
-        UUID()
-    }
-    
     func getPreview() async throws -> [PreviewItem] {
         do {
             let stationsListResponse = try await getStationsList()

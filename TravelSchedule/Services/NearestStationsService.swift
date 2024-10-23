@@ -27,10 +27,6 @@ final class NearestStationsService: BaseService, NearestStationsServiceProtocol 
 }
 
 extension NearestStationsService: PreviewServiceProtocol {
-    var id: UUID {
-        UUID()
-    }
-    
     func getPreview() async throws -> [PreviewItem] {
         do {
             let nearestStationsResponse = try await getNearestStations(
