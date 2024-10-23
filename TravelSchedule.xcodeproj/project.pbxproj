@@ -6,8 +6,28 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		F4ABE6182CC0E4B400E4FAB1 /* OpenAPIRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = F4ABE6172CC0E4B400E4FAB1 /* OpenAPIRuntime */; };
+		F4ABE61B2CC0E4C100E4FAB1 /* OpenAPIURLSession in Frameworks */ = {isa = PBXBuildFile; productRef = F4ABE61A2CC0E4C100E4FAB1 /* OpenAPIURLSession */; };
+		F4C543092CC4084000A7D501 /* openapi.yaml in Resources */ = {isa = PBXBuildFile; fileRef = F4C543042CC4084000A7D501 /* openapi.yaml */; };
+		F4C5430A2CC4084000A7D501 /* openapi-generator-config.yaml in Resources */ = {isa = PBXBuildFile; fileRef = F4C543052CC4084000A7D501 /* openapi-generator-config.yaml */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F4B2B36C2CC764EB00EDC017 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F489F6822CC0330D00744465 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F489F6892CC0330D00744465;
+			remoteInfo = TravelSchedule;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		F489F68A2CC0330D00744465 /* TravelSchedule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelSchedule.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F4B2B3682CC764EB00EDC017 /* TravelScheduleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TravelScheduleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F4C543042CC4084000A7D501 /* openapi.yaml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = openapi.yaml; sourceTree = "<group>"; };
+		F4C543052CC4084000A7D501 /* openapi-generator-config.yaml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "openapi-generator-config.yaml"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -16,10 +36,24 @@
 			path = TravelSchedule;
 			sourceTree = "<group>";
 		};
+		F4B2B3692CC764EB00EDC017 /* TravelScheduleTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = TravelScheduleTests;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		F489F6872CC0330D00744465 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F4ABE61B2CC0E4C100E4FAB1 /* OpenAPIURLSession in Frameworks */,
+				F4ABE6182CC0E4B400E4FAB1 /* OpenAPIRuntime in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F4B2B3652CC764EB00EDC017 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -33,6 +67,9 @@
 			isa = PBXGroup;
 			children = (
 				F489F68C2CC0330D00744465 /* TravelSchedule */,
+				F4B2B3692CC764EB00EDC017 /* TravelScheduleTests */,
+				F4C543052CC4084000A7D501 /* openapi-generator-config.yaml */,
+				F4C543042CC4084000A7D501 /* openapi.yaml */,
 				F489F68B2CC0330D00744465 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				F489F68A2CC0330D00744465 /* TravelSchedule.app */,
+				F4B2B3682CC764EB00EDC017 /* TravelScheduleTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -59,16 +97,42 @@
 			buildRules = (
 			);
 			dependencies = (
+				F4ABE6232CC0E56100E4FAB1 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				F489F68C2CC0330D00744465 /* TravelSchedule */,
 			);
 			name = TravelSchedule;
 			packageProductDependencies = (
+				F4ABE6172CC0E4B400E4FAB1 /* OpenAPIRuntime */,
+				F4ABE61A2CC0E4C100E4FAB1 /* OpenAPIURLSession */,
 			);
 			productName = TravelSchedule;
 			productReference = F489F68A2CC0330D00744465 /* TravelSchedule.app */;
 			productType = "com.apple.product-type.application";
+		};
+		F4B2B3672CC764EB00EDC017 /* TravelScheduleTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F4B2B36E2CC764EB00EDC017 /* Build configuration list for PBXNativeTarget "TravelScheduleTests" */;
+			buildPhases = (
+				F4B2B3642CC764EB00EDC017 /* Sources */,
+				F4B2B3652CC764EB00EDC017 /* Frameworks */,
+				F4B2B3662CC764EB00EDC017 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F4B2B36D2CC764EB00EDC017 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				F4B2B3692CC764EB00EDC017 /* TravelScheduleTests */,
+			);
+			name = TravelScheduleTests;
+			packageProductDependencies = (
+			);
+			productName = TravelScheduleTests;
+			productReference = F4B2B3682CC764EB00EDC017 /* TravelScheduleTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -83,6 +147,10 @@
 					F489F6892CC0330D00744465 = {
 						CreatedOnToolsVersion = 16.0;
 					};
+					F4B2B3672CC764EB00EDC017 = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = F489F6892CC0330D00744465;
+					};
 				};
 			};
 			buildConfigurationList = F489F6852CC0330D00744465 /* Build configuration list for PBXProject "TravelSchedule" */;
@@ -94,18 +162,33 @@
 			);
 			mainGroup = F489F6812CC0330D00744465;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				F4ABE6152CC0E4A600E4FAB1 /* XCRemoteSwiftPackageReference "swift-openapi-generator" */,
+				F4ABE6162CC0E4B400E4FAB1 /* XCRemoteSwiftPackageReference "swift-openapi-runtime" */,
+				F4ABE6192CC0E4C100E4FAB1 /* XCRemoteSwiftPackageReference "swift-openapi-urlsession" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = F489F68B2CC0330D00744465 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				F489F6892CC0330D00744465 /* TravelSchedule */,
+				F4B2B3672CC764EB00EDC017 /* TravelScheduleTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		F489F6882CC0330D00744465 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F4C543092CC4084000A7D501 /* openapi.yaml in Resources */,
+				F4C5430A2CC4084000A7D501 /* openapi-generator-config.yaml in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F4B2B3662CC764EB00EDC017 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -122,7 +205,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F4B2B3642CC764EB00EDC017 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F4ABE6232CC0E56100E4FAB1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = F4ABE6222CC0E56100E4FAB1 /* OpenAPIGenerator */;
+		};
+		F4B2B36D2CC764EB00EDC017 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F489F6892CC0330D00744465 /* TravelSchedule */;
+			targetProxy = F4B2B36C2CC764EB00EDC017 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		F489F6962CC0330E00744465 /* Debug */ = {
@@ -312,6 +414,42 @@
 			};
 			name = Release;
 		};
+		F4B2B36F2CC764EB00EDC017 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3B336RAGHX;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.leonidlavrov.TravelScheduleTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TravelSchedule.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TravelSchedule";
+			};
+			name = Debug;
+		};
+		F4B2B3702CC764EB00EDC017 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3B336RAGHX;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.leonidlavrov.TravelScheduleTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TravelSchedule.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TravelSchedule";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -333,7 +471,61 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		F4B2B36E2CC764EB00EDC017 /* Build configuration list for PBXNativeTarget "TravelScheduleTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F4B2B36F2CC764EB00EDC017 /* Debug */,
+				F4B2B3702CC764EB00EDC017 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F4ABE6152CC0E4A600E4FAB1 /* XCRemoteSwiftPackageReference "swift-openapi-generator" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-openapi-generator";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.1;
+			};
+		};
+		F4ABE6162CC0E4B400E4FAB1 /* XCRemoteSwiftPackageReference "swift-openapi-runtime" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-openapi-runtime";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.0;
+			};
+		};
+		F4ABE6192CC0E4C100E4FAB1 /* XCRemoteSwiftPackageReference "swift-openapi-urlsession" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-openapi-urlsession";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F4ABE6172CC0E4B400E4FAB1 /* OpenAPIRuntime */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F4ABE6162CC0E4B400E4FAB1 /* XCRemoteSwiftPackageReference "swift-openapi-runtime" */;
+			productName = OpenAPIRuntime;
+		};
+		F4ABE61A2CC0E4C100E4FAB1 /* OpenAPIURLSession */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F4ABE6192CC0E4C100E4FAB1 /* XCRemoteSwiftPackageReference "swift-openapi-urlsession" */;
+			productName = OpenAPIURLSession;
+		};
+		F4ABE6222CC0E56100E4FAB1 /* OpenAPIGenerator */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F4ABE6152CC0E4A600E4FAB1 /* XCRemoteSwiftPackageReference "swift-openapi-generator" */;
+			productName = "plugin:OpenAPIGenerator";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F489F6822CC0330D00744465 /* Project object */;
 }
