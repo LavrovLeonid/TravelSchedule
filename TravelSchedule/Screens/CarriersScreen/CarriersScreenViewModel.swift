@@ -7,41 +7,6 @@
 
 import SwiftUI
 
-struct FilterOption: Identifiable {
-    let id = UUID()
-    let name: String
-}
-
-enum FilterType {
-    case checkbox
-    case radio
-}
-
-struct Filter: Identifiable {
-    let id = UUID()
-    let title: String
-    let type: FilterType
-    let options: [FilterOption]
-}
-
-struct AppliedFilter: Equatable, Hashable {
-    let filterId: UUID
-    let values: Set<AppliedFilterValues>
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(filterId)
-    }
-    
-    static func == (lhs: AppliedFilter, rhs: AppliedFilter) -> Bool {
-        lhs.filterId == rhs.filterId
-    }
-}
-
-enum AppliedFilterValues: Hashable {
-    case checkbox(Set<UUID>)
-    case radio(UUID)
-}
-
 final class CarriersViewModel: ObservableObject {
     @Published var carriers: [Carrier] = [
         .init(
@@ -143,7 +108,7 @@ final class CarriersViewModel: ObservableObject {
             ]
         )
     ]
-    @Published var appliedFilters = Dictionary<UUID, AppliedFilterValues>()
+    @Published var appliedFilters = Dictionary<UUID, AppliedFilterValue>()
     
     init(selectedCarrier: Carrier? = nil) {
         self.selectedCarrier = selectedCarrier
@@ -171,10 +136,10 @@ final class CarriersViewModel: ObservableObject {
     }
     
     func apply(option: FilterOption, for filter: Filter) {
-        if let appliedFilterValues = appliedFilters[filter.id] {
+        if let appliedFilterValue = appliedFilters[filter.id] {
             switch filter.type {
                 case .checkbox:
-                    guard case .checkbox(let uuids) = appliedFilterValues else { return }
+                    guard case .checkbox(let uuids) = appliedFilterValue else { return }
                     
                     if uuids.contains(option.id) {
                         let newUuids = uuids.subtracting([option.id])

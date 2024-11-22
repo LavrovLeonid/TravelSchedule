@@ -8,12 +8,11 @@
 import SwiftUI
 
 final class ChoosingDirectionViewModel: ObservableObject {
-    var direction: Direction = .from
-    
-    var fromCity: City?
-    var fromStation: Station?
-    var toCity: City?
-    var toStation: Station?
+    private var direction: Direction = .from
+    private var fromCity: City?
+    private var fromStation: Station?
+    private var toCity: City?
+    private var toStation: Station?
     
     @Published var fromText: String = ""
     @Published var toText: String = ""
