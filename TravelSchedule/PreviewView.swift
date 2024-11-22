@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  PreviewView.swift
 //  TravelSchedule
 //
 //  Created by Леонид Лавров on 10/16/24.
@@ -12,7 +12,7 @@ struct ResultItem {
     let title: String
 }
 
-struct ContentView: View {
+struct PreviewView: View {
     private var previewServices: [any PreviewServiceProtocol] {
         guard let serverURL = try? Servers.server1() else { return [] }
         
@@ -72,5 +72,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    PreviewView()
 }
