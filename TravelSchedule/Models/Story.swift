@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Story: Identifiable {
+struct Story: Identifiable, Hashable, Equatable {
     let id = UUID()
     let image: ImageResource
     let previewImage: ImageResource
