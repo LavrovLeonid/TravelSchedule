@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct StoryPreviewItem: View {
+    let story: Story
     let isViewed: Bool
     
     var body: some View {
-        Image(.story1Preview)
+        Image(story.previewImage)
             .cornerRadius(16)
             .overlay(
                 RoundedRectangle(cornerRadius: 20)
@@ -23,6 +24,7 @@ struct StoryPreviewItem: View {
 
 #Preview {
     StoryPreviewItem(
+        story: .story1,
         isViewed: false
     )
 }
