@@ -12,6 +12,7 @@ struct RootView: View {
     @StateObject private var choosingDirectionViewModel = ChoosingDirectionViewModel()
     @StateObject private var carriersViewModel = CarriersViewModel()
     @StateObject private var appearance = AppearanceViewModel()
+    @StateObject private var storiesViewModel = StoriesViewModel()
     
     var body: some View {
         if #available(iOS 16.0, *) {
@@ -57,6 +58,7 @@ struct RootView: View {
             .environmentObject(choosingDirectionViewModel)
             .environmentObject(carriersViewModel)
             .environmentObject(appearance)
+            .environmentObject(storiesViewModel)
             .preferredColorScheme(appearance.colorScheme)
         } else {
             // Fallback on earlier versions
