@@ -13,7 +13,17 @@ protocol SearchServiceProtocol {
     func getSearch(from: String, to: String) async throws -> SearchResponse
 }
 
-final class SearchService: BaseService, SearchServiceProtocol {
+actor SearchService: BaseServiceProtocol {
+    let client: Client
+    let apiKey: String?
+    
+    init(client: Client, apiKey: String? = nil) {
+        self.client = client
+        self.apiKey = apiKey
+    }
+}
+
+extension SearchService: SearchServiceProtocol {
     func getSearch(from: String, to: String) async throws -> SearchResponse {
         let response = try await client.getSearch(query: .init(
             apikey: apiKey,

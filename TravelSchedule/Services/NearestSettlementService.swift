@@ -13,7 +13,17 @@ protocol NearestSettlementServiceProtocol {
     func getNearestSettlement(lat: Double, lng: Double) async throws -> NearestSettlementResponse
 }
 
-final class NearestSettlementService: BaseService, NearestSettlementServiceProtocol {
+actor NearestSettlementService: BaseServiceProtocol {
+    let client: Client
+    let apiKey: String?
+    
+    init(client: Client, apiKey: String? = nil) {
+        self.client = client
+        self.apiKey = apiKey
+    }
+}
+
+extension NearestSettlementService: NearestSettlementServiceProtocol {
     func getNearestSettlement(lat: Double, lng: Double) async throws -> NearestSettlementResponse {
         let response = try await client.getNearestSettlement(query: .init(
             apikey: apiKey,

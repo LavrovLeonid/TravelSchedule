@@ -13,7 +13,17 @@ protocol StationsListServiceProtocol {
     func getStationsList() async throws -> StationsListResponse
 }
 
-final class StationsListService: BaseService, StationsListServiceProtocol {
+actor StationsListService: BaseServiceProtocol {
+    let client: Client
+    let apiKey: String?
+    
+    init(client: Client, apiKey: String? = nil) {
+        self.client = client
+        self.apiKey = apiKey
+    }
+}
+
+extension StationsListService: StationsListServiceProtocol {
     func getStationsList() async throws -> StationsListResponse {
         let response = try await client.getStationsList(query: .init(
             apikey: apiKey,
