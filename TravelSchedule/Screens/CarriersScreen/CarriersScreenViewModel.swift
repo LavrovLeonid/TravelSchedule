@@ -5,8 +5,9 @@
 //  Created by Леонид Лавров on 11/17/24.
 //
 
-import SwiftUI
+import Foundation
 
+@MainActor
 final class CarriersViewModel: ObservableObject {
     @Published var carriers: [Carrier] = [
         .init(

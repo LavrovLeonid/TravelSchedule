@@ -5,8 +5,9 @@
 //  Created by Леонид Лавров on 11/11/24.
 //
 
-import SwiftUI
+import Foundation
 
+@MainActor
 final class CitiesViewModel: ObservableObject {
     var cities: [City] = [
         City(name: "Москва"),

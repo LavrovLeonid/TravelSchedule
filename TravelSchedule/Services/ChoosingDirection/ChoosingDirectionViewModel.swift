@@ -5,8 +5,9 @@
 //  Created by Леонид Лавров on 11/15/24.
 //
 
-import SwiftUI
+import Foundation
 
+@MainActor
 final class ChoosingDirectionViewModel: ObservableObject {
     private var direction: Direction = .from
     private var fromCity: City?

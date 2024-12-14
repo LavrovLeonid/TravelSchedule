@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@MainActor
 final class AppearanceViewModel: ObservableObject {
     @Published var colorScheme: ColorScheme = .light
     @Published var isDarkMode: Bool = false {

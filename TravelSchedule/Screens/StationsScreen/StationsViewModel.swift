@@ -5,8 +5,9 @@
 //  Created by Леонид Лавров on 11/15/24.
 //
 
-import Combine
+import Foundation
 
+@MainActor
 final class StationsViewModel: ObservableObject {
     var stations: [Station] = [
         Station(name: "Киевский вокзал"),
