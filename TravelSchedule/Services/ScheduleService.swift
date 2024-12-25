@@ -13,7 +13,17 @@ protocol ScheduleServiceProtocol {
     func getSchedule(station: String) async throws -> ScheduleResponse
 }
 
-final class ScheduleService: BaseService, ScheduleServiceProtocol {
+actor ScheduleService: BaseServiceProtocol {
+    let client: Client
+    let apiKey: String?
+    
+    init(client: Client, apiKey: String? = nil) {
+        self.client = client
+        self.apiKey = apiKey
+    }
+}
+
+extension ScheduleService: ScheduleServiceProtocol {
     func getSchedule(station: String) async throws -> ScheduleResponse {
         let response = try await client.getSchedule(query: .init(
             apikey: apiKey,

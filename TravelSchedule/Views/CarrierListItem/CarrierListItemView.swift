@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct CarrierListItemView: View {
     let carrier: Carrier
@@ -13,11 +14,15 @@ struct CarrierListItemView: View {
     var body: some View {
         VStack(spacing: 18) {
             HStack(spacing: 8) {
-                Image(.transfer)
-                    .resizable()
-                    .cornerRadius(12)
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 38, height: 38)
+                WebImage(url: URL(string: carrier.image)) { image in
+                    image.resizable()
+                } placeholder: {
+                    Color.travelLightGray
+                }
+                .renderingMode(.original)
+                .cornerRadius(12)
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 38, height: 38)
                 VStack(alignment: .leading) {
                     HStack {
                         Text(carrier.name)
@@ -61,6 +66,8 @@ struct CarrierListItemView: View {
             image: "",
             date: "14 января",
             transfer: "С пересадкой в Костроме",
+            startDate: nil,
+            endDate: nil,
             startTime: "22:30",
             endTime: "02:15",
             duration: "20 часов",

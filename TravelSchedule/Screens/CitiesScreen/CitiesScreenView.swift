@@ -6,45 +6,57 @@
 //
 
 import SwiftUI
+import OpenAPIURLSession
 
 struct CitiesScreenView: View {
     @EnvironmentObject private var choosingDirectionViewModel: ChoosingDirectionViewModel
     @EnvironmentObject private var navigation: NavigationViewModel
-    @StateObject private var viewModel = CitiesViewModel()
+    @EnvironmentObject private var citiesViewModel: CitiesViewModel
     
     var body: some View {
         VStack {
-            SearchBar(
-                searchText: $viewModel.searchText,
-                isSearching: true,
-                placeholder: "Введите запрос"
-            )
-            if !viewModel.searchText.isEmpty,
-               viewModel.filteredCities.isEmpty {
-                Spacer()
-                VStack {
-                    Text("Город не найден")
-                        .font(.system(size: 24, weight: .bold))
-                        .tint(Color.travelBlack)
-                }
-            } else {
-                ScrollView {
-                    LazyVStack(spacing: 0) {
-                        ForEach(viewModel.filteredCities) { city in
-                            ListItem(title: city.name)
-                                .onTapGesture {
-                                    choosingDirectionViewModel.setCity(city)
-                                    navigation.push(screen: .stations)
+            switch citiesViewModel.errorType {
+                case .some(let errorType):
+                    ErrorScreenView(errorType: errorType)
+                case .none:
+                    SearchBar(
+                        searchText: $citiesViewModel.searchText,
+                        isSearching: true,
+                        placeholder: "Введите запрос"
+                    )
+                    if !citiesViewModel.searchText.isEmpty,
+                       citiesViewModel.filteredCities.isEmpty {
+                        Spacer()
+                        VStack {
+                            Text("Город не найден")
+                                .font(.system(size: 24, weight: .bold))
+                                .tint(Color.travelBlack)
+                        }
+                    } else {
+                        ScrollView {
+                            LazyVStack(spacing: 0) {
+                                ForEach(citiesViewModel.filteredCities) { city in
+                                    ListItem(title: city.name)
+                                        .onTapGesture {
+                                            choosingDirectionViewModel.setCity(city)
+                                            navigation.push(screen: .stations)
+                                        }
                                 }
+                            }
                         }
                     }
-                }
+                    Spacer()
             }
-            Spacer()
         }
         .background(Color.travelWhite)
         .navigationTitle("Выбор города")
         .navigationBarBackButtonTitleHidden()
+        .task {
+            await citiesViewModel.fetchCities()
+        }
+        .onDisappear {
+            citiesViewModel.reset()
+        }
     }
 }
 

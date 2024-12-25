@@ -5,7 +5,7 @@
 //  Created by Леонид Лавров on 11/6/24.
 //
 
-import SwiftUI
+import Foundation
 
 final class NavigationViewModel: ObservableObject {
     @Published var path: [NavigationScreen] = []

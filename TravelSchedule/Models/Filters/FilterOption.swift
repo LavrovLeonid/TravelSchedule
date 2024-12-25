@@ -7,7 +7,10 @@
 
 import Foundation
 
-struct FilterOption: Identifiable {
+typealias AnyFilterOption = FilterOption<Any>
+
+struct FilterOption<T>: Identifiable {
     let id = UUID()
     let name: String
+    let value: T
 }

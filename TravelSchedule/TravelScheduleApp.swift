@@ -6,9 +6,15 @@
 //
 
 import SwiftUI
+import SDWebImage
+import SDWebImageSVGKitPlugin
 
 @main
 struct TravelScheduleApp: App {
+    init() {
+        SDImageCodersManager.shared.addCoder(SDImageSVGKCoder.shared)
+    }
+    
     var body: some Scene {
         WindowGroup {
             RootView()

@@ -7,9 +7,12 @@
 
 import Foundation
 
-struct Filter: Identifiable {
+typealias AnyFilter = Filter<Any, AnyHashable>
+
+struct Filter<T, K: Hashable>: Identifiable {
     let id = UUID()
+    let key: K
     let title: String
     let type: FilterType
-    let options: [FilterOption]
+    let options: [FilterOption<T>]
 }

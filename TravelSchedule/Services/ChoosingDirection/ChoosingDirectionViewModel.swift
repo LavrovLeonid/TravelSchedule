@@ -5,15 +5,15 @@
 //  Created by Леонид Лавров on 11/15/24.
 //
 
-import SwiftUI
+import Foundation
 
+@MainActor
 final class ChoosingDirectionViewModel: ObservableObject {
-    private var direction: Direction = .from
-    private var fromCity: City?
-    private var fromStation: Station?
-    private var toCity: City?
-    private var toStation: Station?
-    
+    @Published var fromStation: Station?
+    @Published var toStation: Station?
+    @Published var direction: Direction = .from
+    @Published var fromCity: City?
+    @Published var toCity: City?
     @Published var fromText: String = ""
     @Published var toText: String = ""
     

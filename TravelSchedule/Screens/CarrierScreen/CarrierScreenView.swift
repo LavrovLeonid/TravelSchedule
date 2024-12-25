@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct CarrierScreenView: View {
     @EnvironmentObject private var carriersViewModel: CarriersViewModel
@@ -14,12 +15,15 @@ struct CarrierScreenView: View {
         if let selectedCarrier = carriersViewModel.selectedCarrier {
             HStack {
                 VStack(alignment: .leading) {
-                    Image(.transferFull)
-                        .resizable()
-                        .padding()
-                        .cornerRadius(24)
-                        .aspectRatio(contentMode: .fit)
-                        .frame(maxWidth: .infinity)
+                    WebImage(url: URL(string: selectedCarrier.image)) { image in
+                        image.resizable()
+                    } placeholder: {
+                        Color.travelLightGray
+                    }
+                    .padding()
+                    .cornerRadius(24)
+                    .aspectRatio(contentMode: .fit)
+                    .frame(maxWidth: .infinity)
                     Text(selectedCarrier.fullName)
                         .font(.system(size: 24, weight: .bold))
                         .padding(.horizontal)
@@ -52,19 +56,4 @@ struct CarrierScreenView: View {
 
 #Preview {
     CarrierScreenView()
-        .environmentObject(
-            CarriersViewModel(selectedCarrier: .init(
-                name: "РЖД",
-                image: "",
-                date: "14 января",
-                transfer: "С пересадкой в Костроме",
-                startTime: "22:30",
-                endTime: "02:15",
-                duration: "20 часов",
-                fullName: "ОАО «РЖД»",
-                fullImage: "",
-                email: "i.lozgkina@yandex.ru",
-                phone: "+7 (904) 329-27-71"
-            ))
-        )
 }

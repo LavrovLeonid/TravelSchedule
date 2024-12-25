@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum ErrorType {
+enum ErrorType: Error {
     case server
     case noConnection
     

@@ -13,7 +13,17 @@ protocol ThreadServiceProtocol {
     func getThread(uid: String) async throws -> ThreadResponse
 }
 
-final class ThreadService: BaseService, ThreadServiceProtocol {
+actor ThreadService: BaseServiceProtocol {
+    let client: Client
+    let apiKey: String?
+    
+    init(client: Client, apiKey: String? = nil) {
+        self.client = client
+        self.apiKey = apiKey
+    }
+}
+
+extension ThreadService: ThreadServiceProtocol {
     func getThread(uid: String) async throws -> ThreadResponse {
         let response = try await client.getThread(query: .init(
             apikey: apiKey,

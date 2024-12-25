@@ -10,41 +10,61 @@ import SwiftUI
 struct StationsScreenView: View {
     @EnvironmentObject private var choosingDirectionViewModel: ChoosingDirectionViewModel
     @EnvironmentObject private var navigation: NavigationViewModel
-    @StateObject private var viewModel = StationsViewModel()
+    @EnvironmentObject private var stationsViewModel: StationsViewModel
     
     var body: some View {
         VStack {
-            SearchBar(
-                searchText: $viewModel.searchText,
-                isSearching: true,
-                placeholder: "Введите запрос"
-            )
-            if !viewModel.searchText.isEmpty,
-               viewModel.filteredStations.isEmpty {
-                Spacer()
-                VStack {
-                    Text("Станция не найдена")
-                        .font(.system(size: 24, weight: .bold))
-                        .tint(Color.travelBlack)
-                }
-            } else {
-                ScrollView {
-                    LazyVStack(spacing: 0) {
-                        ForEach(viewModel.filteredStations) { station in
-                            ListItem(title: station.name)
-                                .onTapGesture {
-                                    choosingDirectionViewModel.setStation(station)
-                                    navigation.popToRoot()
+            switch stationsViewModel.errorType {
+                case .some(let errorType):
+                    ErrorScreenView(errorType: errorType)
+                case .none:
+                    SearchBar(
+                        searchText: $stationsViewModel.searchText,
+                        isSearching: true,
+                        placeholder: "Введите запрос"
+                    )
+                    if !stationsViewModel.searchText.isEmpty,
+                       stationsViewModel.filteredStations.isEmpty {
+                        Spacer()
+                        VStack {
+                            Text("Станция не найдена")
+                                .font(.system(size: 24, weight: .bold))
+                                .tint(Color.travelBlack)
+                        }
+                    } else {
+                        ScrollView {
+                            LazyVStack(spacing: 0) {
+                                ForEach(stationsViewModel.filteredStations) { station in
+                                    ListItem(title: station.name)
+                                        .onTapGesture {
+                                            choosingDirectionViewModel.setStation(station)
+                                            navigation.popToRoot()
+                                        }
                                 }
+                            }
                         }
                     }
-                }
+                    Spacer()
             }
-            Spacer()
         }
         .background(Color.travelWhite)
         .navigationTitle("Выбор станции")
         .navigationBarBackButtonTitleHidden()
+        .task {
+            switch choosingDirectionViewModel.direction {
+                case .from:
+                    guard let fromCity = choosingDirectionViewModel.fromCity else { return }
+                    
+                    await stationsViewModel.fetchStations(at: fromCity)
+                case .to:
+                    guard let toCity = choosingDirectionViewModel.toCity else { return }
+                    
+                    await stationsViewModel.fetchStations(at: toCity)
+            }
+        }
+        .onDisappear {
+            stationsViewModel.reset()
+        }
     }
 }
 

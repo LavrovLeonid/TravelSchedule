@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct City: Identifiable {
+struct City: Identifiable, DestinationProtocol {
     let id = UUID()
     let name: String
+    let coordinate: Coordinate
 }

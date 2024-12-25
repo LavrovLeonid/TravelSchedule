@@ -13,7 +13,17 @@ protocol CarrierServiceProtocol {
     func getCarrier(code: String) async throws -> CarrierResponse
 }
 
-final class CarrierService: BaseService, CarrierServiceProtocol {
+actor CarrierService: BaseServiceProtocol {
+    let client: Client
+    let apiKey: String?
+    
+    init(client: Client, apiKey: String? = nil) {
+        self.client = client
+        self.apiKey = apiKey
+    }
+}
+
+extension CarrierService: CarrierServiceProtocol {
     func getCarrier(code: String) async throws -> CarrierResponse {
         let response = try await client.getCarrier(query: .init(
             apikey: apiKey,

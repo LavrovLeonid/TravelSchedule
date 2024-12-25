@@ -168,13 +168,10 @@ components:
       properties:
         pagination:
           $ref: '#/components/schemas/Pagination'
-        interval_segments:
+        segments:
           type: array
           items:
-            type: object
-            properties:
-              thread:
-                $ref: '#/components/schemas/Thread'
+            $ref: '#/components/schemas/Segment'
     ScheduleResponse:
       type: object
       properties:
@@ -300,11 +297,14 @@ components:
           nullable: true
         code:
           $ref: '#/components/schemas/StationCode'
-#        Приходят невалидные данные
-#        lat:
-#          $ref: '#/components/schemas/Latitude'
-#        lng:
-#          $ref: '#/components/schemas/Longitude'
+        lat:
+          type: number
+          format: double
+          nullable: true
+        lng:
+          type: number
+          format: double
+          nullable: true
         station_type:
           $ref: '#/components/schemas/StationType'
         station_type_name:
@@ -325,6 +325,22 @@ components:
           type: string
         touch_url:
           type: string
+    Segment:
+      type: object
+      properties:
+        thread:
+          $ref: '#/components/schemas/Thread'
+        start_date:
+          type: string
+        departure:
+          type: string
+        arrival:
+          type: string
+        duration:
+          type: number
+          format: double
+        stops:
+          type: string
     Thread:
       type: object
       properties:
@@ -332,6 +348,23 @@ components:
           type: string
         title:
           type: string
+        carrier:
+          type: object
+          nullable: true
+          properties:
+            title:
+              type: string
+            logo:
+              type: string
+            logo_svg:
+              type: string
+              nullable: true
+            email:
+              type: string
+              nullable: true
+            phone:
+              type: string
+              nullable: true
     Copyright:
       type: object
       properties:
