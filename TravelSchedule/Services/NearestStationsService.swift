@@ -9,8 +9,13 @@ import Foundation
 
 typealias NearestStationsResponse = Components.Schemas.NearestStationsResponse
 
-protocol NearestStationsServiceProtocol {
-    func getNearestStations(lat: Double, lng: Double, distance: Int) async throws -> NearestStationsResponse
+protocol NearestStationsServiceProtocol: Sendable {
+    func getNearestStations(
+        lat: Double,
+        lng: Double,
+        distance: Int,
+        limit: Components.Parameters.limit?
+    ) async throws -> NearestStationsResponse
 }
 
 actor NearestStationsService: BaseServiceProtocol {
@@ -24,12 +29,18 @@ actor NearestStationsService: BaseServiceProtocol {
 }
 
 extension NearestStationsService: NearestStationsServiceProtocol {
-    func getNearestStations(lat: Double, lng: Double, distance: Int) async throws -> NearestStationsResponse {
+    func getNearestStations(
+        lat: Double,
+        lng: Double,
+        distance: Int,
+        limit: Components.Parameters.limit?
+    ) async throws -> NearestStationsResponse {
         let response = try await client.getNearestStations(query: .init(
             apikey: apiKey,
             lat: lat,
             lng: lng,
-            distance: distance
+            distance: distance,
+            limit: limit
         ))
         
         return try response.ok.body.json
@@ -42,7 +53,8 @@ extension NearestStationsService: PreviewServiceProtocol {
             let nearestStationsResponse = try await getNearestStations(
                 lat: 59.864177,
                 lng: 30.319163,
-                distance: 50
+                distance: 50,
+                limit: nil
             )
             
             return nearestStationsResponse.stations?.map { station in

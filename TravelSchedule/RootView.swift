@@ -6,13 +6,50 @@
 //
 
 import SwiftUI
+import OpenAPIURLSession
 
 struct RootView: View {
     @StateObject private var navigation = NavigationViewModel()
-    @StateObject private var choosingDirectionViewModel = ChoosingDirectionViewModel()
-    @StateObject private var carriersViewModel = CarriersViewModel()
     @StateObject private var appearance = AppearanceViewModel()
     @StateObject private var storiesViewModel = StoriesViewModel()
+    @StateObject private var choosingDirectionViewModel = ChoosingDirectionViewModel()
+    @StateObject private var citiesViewModel: CitiesViewModel
+    @StateObject private var stationsViewModel: StationsViewModel
+    @StateObject private var carriersViewModel: CarriersViewModel
+    
+    init() {
+        let serverURL = try! Servers.server1()
+
+        let authenticationMiddleware = AuthenticationMiddleware(
+            apiKey: Constants.apiKey
+        )
+        
+        var client: Client {
+            Client(
+                serverURL: serverURL,
+                transport: URLSessionTransport(),
+                middlewares: [authenticationMiddleware]
+            )
+        }
+        
+        _citiesViewModel = StateObject(
+            wrappedValue: CitiesViewModel(
+                nearestSettlementService: NearestSettlementService(client: client)
+            )
+        )
+        
+        _stationsViewModel = StateObject(
+            wrappedValue: StationsViewModel(
+                nearestStationsService: NearestStationsService(client: client)
+            )
+        )
+        
+        _carriersViewModel = StateObject(
+            wrappedValue: CarriersViewModel(
+                searchService: SearchService(client: client)
+            )
+        )
+    }
     
     var body: some View {
         if #available(iOS 16.0, *) {
@@ -59,6 +96,8 @@ struct RootView: View {
             .environmentObject(carriersViewModel)
             .environmentObject(appearance)
             .environmentObject(storiesViewModel)
+            .environmentObject(citiesViewModel)
+            .environmentObject(stationsViewModel)
             .preferredColorScheme(appearance.colorScheme)
         } else {
             // Fallback on earlier versions

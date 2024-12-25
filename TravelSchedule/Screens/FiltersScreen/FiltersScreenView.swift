@@ -46,7 +46,8 @@ struct FiltersScreenView: View {
                     HStack {
                         Text("Применить")
                             .font(.system(size: 17, weight: .bold))
-                        if !carriersViewModel.appliedFilters.isEmpty {
+                        if carriersViewModel.hasTransfers != nil ||
+                            !carriersViewModel.timeIntervals.isEmpty {
                             Ellipse()
                                 .fill(.redUniversal)
                                 .frame(width: 8, height: 8)

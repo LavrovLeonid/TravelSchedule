@@ -11,6 +11,8 @@
 		F4ABE61B2CC0E4C100E4FAB1 /* OpenAPIURLSession in Frameworks */ = {isa = PBXBuildFile; productRef = F4ABE61A2CC0E4C100E4FAB1 /* OpenAPIURLSession */; };
 		F4C543092CC4084000A7D501 /* openapi.yaml in Resources */ = {isa = PBXBuildFile; fileRef = F4C543042CC4084000A7D501 /* openapi.yaml */; };
 		F4C5430A2CC4084000A7D501 /* openapi-generator-config.yaml in Resources */ = {isa = PBXBuildFile; fileRef = F4C543052CC4084000A7D501 /* openapi-generator-config.yaml */; };
+		F4EBCB042D1B0FCF00479CB1 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = F4EBCB032D1B0FCF00479CB1 /* SDWebImageSwiftUI */; };
+		F4EBCB092D1B11CE00479CB1 /* SDWebImageSVGKitPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = F4EBCB082D1B11CE00479CB1 /* SDWebImageSVGKitPlugin */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +50,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4EBCB042D1B0FCF00479CB1 /* SDWebImageSwiftUI in Frameworks */,
+				F4EBCB092D1B11CE00479CB1 /* SDWebImageSVGKitPlugin in Frameworks */,
 				F4ABE61B2CC0E4C100E4FAB1 /* OpenAPIURLSession in Frameworks */,
 				F4ABE6182CC0E4B400E4FAB1 /* OpenAPIRuntime in Frameworks */,
 			);
@@ -106,6 +110,8 @@
 			packageProductDependencies = (
 				F4ABE6172CC0E4B400E4FAB1 /* OpenAPIRuntime */,
 				F4ABE61A2CC0E4C100E4FAB1 /* OpenAPIURLSession */,
+				F4EBCB032D1B0FCF00479CB1 /* SDWebImageSwiftUI */,
+				F4EBCB082D1B11CE00479CB1 /* SDWebImageSVGKitPlugin */,
 			);
 			productName = TravelSchedule;
 			productReference = F489F68A2CC0330D00744465 /* TravelSchedule.app */;
@@ -166,6 +172,8 @@
 				F4ABE6152CC0E4A600E4FAB1 /* XCRemoteSwiftPackageReference "swift-openapi-generator" */,
 				F4ABE6162CC0E4B400E4FAB1 /* XCRemoteSwiftPackageReference "swift-openapi-runtime" */,
 				F4ABE6192CC0E4C100E4FAB1 /* XCRemoteSwiftPackageReference "swift-openapi-urlsession" */,
+				F4EBCB022D1B0FCF00479CB1 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				F4EBCB072D1B11CE00479CB1 /* XCRemoteSwiftPackageReference "SDWebImageSVGKitPlugin" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = F489F68B2CC0330D00744465 /* Products */;
@@ -511,6 +519,22 @@
 				minimumVersion = 1.0.2;
 			};
 		};
+		F4EBCB022D1B0FCF00479CB1 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.3;
+			};
+		};
+		F4EBCB072D1B11CE00479CB1 /* XCRemoteSwiftPackageReference "SDWebImageSVGKitPlugin" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSVGKitPlugin";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -528,6 +552,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F4ABE6152CC0E4A600E4FAB1 /* XCRemoteSwiftPackageReference "swift-openapi-generator" */;
 			productName = "plugin:OpenAPIGenerator";
+		};
+		F4EBCB032D1B0FCF00479CB1 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F4EBCB022D1B0FCF00479CB1 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
+		F4EBCB082D1B11CE00479CB1 /* SDWebImageSVGKitPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F4EBCB072D1B11CE00479CB1 /* XCRemoteSwiftPackageReference "SDWebImageSVGKitPlugin" */;
+			productName = SDWebImageSVGKitPlugin;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

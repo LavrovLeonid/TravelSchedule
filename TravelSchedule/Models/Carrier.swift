@@ -13,6 +13,8 @@ struct Carrier: Identifiable {
     let image: String
     let date: String
     let transfer: String?
+    let startDate: Date?
+    let endDate: Date?
     let startTime: String
     let endTime: String
     let duration: String

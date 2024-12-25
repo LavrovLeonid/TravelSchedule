@@ -11,6 +11,7 @@ struct MainScreenView: View {
     @EnvironmentObject private var navigation: NavigationViewModel
     @EnvironmentObject private var choosingDirectionViewModel: ChoosingDirectionViewModel
     @EnvironmentObject private var storiesViewModel: StoriesViewModel
+    @EnvironmentObject private var carriersViewModel: CarriersViewModel
     
     @State private var isPresentStories = false
     
@@ -46,9 +47,10 @@ struct MainScreenView: View {
                 choosingDirectionViewModel.rotateDirections()
             }
             .padding()
-            if !choosingDirectionViewModel.fromText.isEmpty,
-               !choosingDirectionViewModel.toText.isEmpty {
+            if choosingDirectionViewModel.fromStation != nil,
+               choosingDirectionViewModel.toStation != nil {
                 Button(action: {
+                    carriersViewModel.reset()
                     navigation.push(screen: .carriers)
                 }) {
                     Text("Найти")

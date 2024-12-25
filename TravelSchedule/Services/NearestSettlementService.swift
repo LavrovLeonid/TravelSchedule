@@ -6,10 +6,11 @@
 //
 
 import Foundation
+import OpenAPIRuntime
 
 typealias NearestSettlementResponse = Components.Schemas.NearestSettlementResponse
 
-protocol NearestSettlementServiceProtocol {
+protocol NearestSettlementServiceProtocol: Sendable {
     func getNearestSettlement(lat: Double, lng: Double) async throws -> NearestSettlementResponse
 }
 
@@ -24,14 +25,27 @@ actor NearestSettlementService: BaseServiceProtocol {
 }
 
 extension NearestSettlementService: NearestSettlementServiceProtocol {
-    func getNearestSettlement(lat: Double, lng: Double) async throws -> NearestSettlementResponse {
-        let response = try await client.getNearestSettlement(query: .init(
-            apikey: apiKey,
-            lat: lat,
-            lng: lng
-        ))
-        
-        return try response.ok.body.json
+    func getNearestSettlement(
+        lat: Double,
+        lng: Double
+    ) async throws(ClientError) -> NearestSettlementResponse {
+        do {
+            let response = try await client.getNearestSettlement(query: .init(
+                apikey: apiKey,
+                lat: lat,
+                lng: lng
+            ))
+            
+            return try response.ok.body.json
+        } catch let error as OpenAPIRuntime.ClientError {
+            guard case URLError.notConnectedToInternet = error.underlyingError else {
+                throw .server
+            }
+            
+            throw .noConnection
+        } catch {
+            throw .server
+        }
     }
 }
 

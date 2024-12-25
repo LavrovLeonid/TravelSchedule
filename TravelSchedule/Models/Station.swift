@@ -7,7 +7,12 @@
 
 import Foundation
 
-struct Station: Identifiable {
-    let id = UUID()
+struct Station: DestinationProtocol {
+    let code: String
     let name: String
+    let coordinate: Coordinate
+}
+
+extension Station: Identifiable {
+    var id: String { code }
 }
